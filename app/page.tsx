@@ -7,8 +7,11 @@ import "./../app/app.css";
 import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
-import { Authenticator } from '@aws-amplify/ui-react'
-import '@aws-amplify/ui-react/styles.css'
+import { Authenticator, Card } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
+import { ThemeProvider } from "@aws-amplify/ui-react";
+import TodoCreateForm from "@/ui-components/TodoCreateForm";
+import UserCreateForm from "@/ui-components/UserCreateForm";
 
 Amplify.configure(outputs);
 
@@ -26,6 +29,7 @@ export default function App() {
 
     return () => sub.unsubscribe();
   }, []);
+
   function createTodo() {
     client.models.Todo.create({
       content: window.prompt("Todo content"),
@@ -38,13 +42,17 @@ export default function App() {
   }
 
   return (
-
     <Authenticator>
       {({ signOut, user }) => (
-        <main>
+        <main >
           <h1>{user?.signInDetails?.loginId}'s todos</h1>
-          {/* <h1>My todos</h1> */}
-          <button onClick={createTodo}>+ new</button>
+          <Card style={{ marginBottom: "1rem" }}>
+            <TodoCreateForm />
+            {/* <UserCreateForm /> */}
+          </Card>
+          {/* <TodoCreateForm />
+          <UserCreateForm /> */}
+          {/* <button onClick={createTodo}>+ new</button> */}
           <ul>
             {todos.map((todo) => (
               <li key={todo.id}>{todo.content}</li>
@@ -57,8 +65,9 @@ export default function App() {
               Review next steps of this tutorial.
             </a>
           </div>
-          <button onClick={signOut}>Sign out</button>
+          {/* <button onClick={signOut}>Sign out</button> */}
         </main>
-      )}</Authenticator>
+      )}
+    </Authenticator>
   );
 }

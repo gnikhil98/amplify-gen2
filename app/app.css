@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background: linear-gradient(180deg, rgb(117, 81, 194), rgb(255, 255, 255));
+    background: linear-gradient(180deg, #04c8de 0%, #464747 100%);
     display: flex;
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     height: 100vh;
@@ -13,6 +13,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    height: 100vh;
   }
   
   button {
@@ -42,12 +43,14 @@ body {
     list-style-type: none;
     display: flex;
     flex-direction: column;
-    margin: 8px 0;
+    margin: 8px 1px;
     border: 1px solid black;
     gap: 1px;
     background-color: black;
     border-radius: 8px;
-    overflow: auto;
+    overflow-y: scroll;
+    max-height: 240px;
+    padding: auto;
   }
   
   li {
